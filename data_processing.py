@@ -23,10 +23,8 @@ def file_preparation(data):
     return train_data
 
 def calculate_descriptors(data):
-    data = file_preparation(data)
-    molecules = []
-    dict = {}
-    desc_list = [n[0] for n in Descriptors._descList]
+    dict = {} # Initializes a dictionary that will hold each molecule with its descriptors
+    desc_list = [n[0] for n in Descriptors._descList] 
     calc = MoleculeDescriptors.MolecularDescriptorCalculator(desc_list)
     outputcsv = 'data.csv'
     scaler = MinMaxScaler()
@@ -46,3 +44,5 @@ def calculate_descriptors(data):
     return dict
 
 print(calculate_descriptors('/Users/stefaniekip/Documents/BMT jaar 4/Q2 - Advanced programming/Groeps opdracht/drd-3-binder-quest (1)/train.csv'))
+
+data = file_preparation(data)
