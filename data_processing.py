@@ -11,6 +11,7 @@ import pandas as pd
 
 rdkit.__version__
 
+
 def file_preparation(data):
     """
     This function reads the file and extracts the smiles
@@ -20,27 +21,22 @@ def file_preparation(data):
         next(reader)                            #skip first row (the header)
         smiles = [row[0] for row in reader]
         train_data = smiles[:10]
+
+
     return train_data
 
+
 def calculate_descriptors(data):
-    dict = {} # Initializes a dictionary that will hold each molecule with its descriptors
+    descriptor_dict = {} # Initializes a dictionary that will hold each molecule with its descriptors
     desc_list = [n[0] for n in Descriptors._descList] # Finds all possible descriptors and stores these in desc_list
     calc = MoleculeDescriptors.MolecularDescriptorCalculator(desc_list) # Initializes the calculater with the wanted descriptors
 
     for row in data:
-        descriptors = [] # list to hold all the descriptor values
+        descriptor_values = [] # list to hold all the descriptor values
         mol = Chem.MolFromSmiles(row) # Converts SMILES molecule object to RDKit molecule object
         mol_descriptors =calc.CalcDescriptors(mol) # Gets all descriptors for a molecule
-        descriptors.append(mol_descriptors) # append the descriptors to the descriptors list
-        
+        descriptor_values.append(mol_descriptors) # append the descriptors to the descriptors list
 
-    pd.DataFrame.from_dict(dict)
-    #with open("data.csv", "w", newline="") as f:
-       # w = csv.DictWriter(f, dict.keys())
-        #w.writeheader()
-        #w.writerow(dict)
-
-    return dict
 
 print(calculate_descriptors('/Users/stefaniekip/Documents/BMT jaar 4/Q2 - Advanced programming/Groeps opdracht/drd-3-binder-quest (1)/train.csv'))
 
