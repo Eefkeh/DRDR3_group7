@@ -11,12 +11,13 @@ import pandas as pd
 
 rdkit.__version__
 
+file = 
 
-def file_preparation(data):
+def file_preparation(file):
     """
     This function reads the file and extracts the smiles
     """
-    with open(data, 'r') as file:
+    with open(file, 'r') as file:
         reader = csv.reader(file)
         next(reader)                            #skip first row (the header)
         smiles = [row[0] for row in reader]
@@ -34,8 +35,11 @@ def get_descriptors(data):
     for row in data:
         mol = Chem.MolFromSmiles(row) # Converts SMILES molecule object to RDKit molecule object
         mol_descriptors =calc.CalcDescriptors(mol) # Gets all descriptors for a molecule
-        descriptors_normalized = normalize([descriptors], norm='L2')
+        descriptors_normalized = normalize([descriptors], norm='l2')
+        descriptor_dict[mol] = normalized_descriptors
+    
+    print(descriptor_data)
 
-print(calculate_descriptors('/Users/stefaniekip/Documents/BMT jaar 4/Q2 - Advanced programming/Groeps opdracht/drd-3-binder-quest (1)/train.csv'))
+data = file_preparation(file)
 
-data = file_preparation(data)
+get_descriptors(data)
