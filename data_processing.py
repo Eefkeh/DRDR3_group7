@@ -11,7 +11,7 @@ import pandas as pd
 
 rdkit.__version__
 
-file = 
+file = "dataset.csv"
 
 def file_preparation(file):
     """
@@ -34,10 +34,11 @@ def get_descriptors(data):
 
     for row in data:
         mol = Chem.MolFromSmiles(row) # Converts SMILES molecule object to RDKit molecule object
-        mol_descriptors =calc.CalcDescriptors(mol) # Gets all descriptors for a molecule
-        descriptors_normalized = normalize([descriptors], norm='l2')
-        descriptor_dict[mol] = normalized_descriptors
+        mol_descriptors = calc.CalcDescriptors(mol) # Gets all descriptors for a molecule
+        descriptors_normalized = normalize([mol_descriptors], norm='l2')
+        descriptor_dict[mol] = descriptors_normalized
     
+    pd.DataFrame.from_dict([descriptor_dict])
     print(descriptor_data)
 
 data = file_preparation(file)
