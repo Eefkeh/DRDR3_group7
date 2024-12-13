@@ -24,13 +24,13 @@ def file_preparation(data):
 
 def calculate_descriptors(data):
     dict = {} # Initializes a dictionary that will hold each molecule with its descriptors
-    desc_list = [n[0] for n in Descriptors._descList] 
-    calc = MoleculeDescriptors.MolecularDescriptorCalculator(desc_list)
-    outputcsv = 'data.csv'
-    scaler = MinMaxScaler()
+    desc_list = [n[0] for n in Descriptors._descList] # Finds all possible descriptors and stores these in desc_list
+    calc = MoleculeDescriptors.MolecularDescriptorCalculator(desc_list) # Initializes the calculater with the wanted descriptors
+
     for row in data:
-        descriptors = []
-        mol = Chem.MolFromSmiles(row)
+        descriptors = [] # list to hold all the descriptor values
+        mol = Chem.MolFromSmiles(row) # Converts SMILES molecule object to RDKit molecule object
+        mol_descriptors =
         descriptors.append(calc.CalcDescriptors(mol))
         #normalized_data = scaler.fit_transform(descriptors)
         normalized_data = normalize(descriptors, norm = 'l2')
