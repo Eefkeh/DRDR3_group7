@@ -18,7 +18,7 @@ def file_preparation(file):
     This function reads the file and extracts the smiles
     """
     with open(file, 'r') as file:
-        reader = csv.reader(file)
+        df = csv.reader(file)
         next(reader)                            #skip first row (the header)
         smiles = [row[0] for row in reader]
         train_data = smiles[:10]
