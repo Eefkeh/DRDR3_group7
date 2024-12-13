@@ -32,11 +32,9 @@ def get_descriptors(data):
     calc = MoleculeDescriptors.MolecularDescriptorCalculator(desc_list) # Initializes the calculater with the wanted descriptors
 
     for row in data:
-        descriptor_values = [] # list to hold all the descriptor values
         mol = Chem.MolFromSmiles(row) # Converts SMILES molecule object to RDKit molecule object
         mol_descriptors =calc.CalcDescriptors(mol) # Gets all descriptors for a molecule
-        descriptor_values.append(mol_descriptors) # append the descriptors to the descriptors list
-
+        descriptors_normalized = normalize([descriptors], norm='L2')
 
 print(calculate_descriptors('/Users/stefaniekip/Documents/BMT jaar 4/Q2 - Advanced programming/Groeps opdracht/drd-3-binder-quest (1)/train.csv'))
 
