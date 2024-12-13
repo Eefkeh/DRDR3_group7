@@ -30,11 +30,10 @@ def calculate_descriptors(data):
     for row in data:
         descriptors = [] # list to hold all the descriptor values
         mol = Chem.MolFromSmiles(row) # Converts SMILES molecule object to RDKit molecule object
-        mol_descriptors =
-        descriptors.append(calc.CalcDescriptors(mol))
-        #normalized_data = scaler.fit_transform(descriptors)
-        normalized_data = normalize(descriptors, norm = 'l2')
-        dict[row]= normalized_data
+        mol_descriptors =calc.CalcDescriptors(mol) # Gets all descriptors for a molecule
+        descriptors.append(mol_descriptors) # append the descriptors to the descriptors list
+        
+
     pd.DataFrame.from_dict(dict)
     #with open("data.csv", "w", newline="") as f:
        # w = csv.DictWriter(f, dict.keys())
