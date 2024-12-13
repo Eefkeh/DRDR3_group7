@@ -26,7 +26,7 @@ def file_preparation(data):
     return train_data
 
 
-def calculate_descriptors(data):
+def get_descriptors(data):
     descriptor_dict = {} # Initializes a dictionary that will hold each molecule with its descriptors
     desc_list = [n[0] for n in Descriptors._descList] # Finds all possible descriptors and stores these in desc_list
     calc = MoleculeDescriptors.MolecularDescriptorCalculator(desc_list) # Initializes the calculater with the wanted descriptors
